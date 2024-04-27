@@ -25,14 +25,14 @@ const { expect } = require('@playwright/test');
 
   await page.goto('https://ecommerce-playground.lambdatest.io')
 
-  const element = await page.$(`.flex-md-nowrap [type='text']`)
+  const element = await page.getByRole('textbox', { name: 'Search For Products' })
   await element.click()
   await element.type('Iphone')
   await element.press('Enter')
   const title = await page.title()
 
   try {
-    expect(title).toEqual('Search - iphone')
+    expect(title).toEqual('Search - Iphone')
     // Mark the test as completed or failed
     await page.evaluate(_ => {}, `lambdatest_action: ${JSON.stringify({ action: 'setTestStatus', arguments: { status: 'passed', remark: 'Title matched' } })}`)
   } catch {
